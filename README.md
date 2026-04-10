@@ -10,7 +10,7 @@ It includes working and non-working demos in **Go, .NET, Python, and PHP**, alon
 
 - **Go/** - Working Go demo with traces + metrics.  
 - **DotNet/** - Full .NET demo with traces, metrics, and logs.  
-- **Python/** - Attempted Python demos (not fully working).  
+- **Python/** - Full Python demo with traces, metrics and logs -> see example code at https://github.com/avillela/otel-errors-talk/
 - **PHP/** - Attempted PHP demos (not fully working).  
 - **notes/** - Conclusions and lessons learned.
 
@@ -55,38 +55,19 @@ Note: Metrics might need a few seconds to appear in OTEL Viewer due to batching.
 
 ### Python
 
-```bash
-cd Python
-python3 -m venv venv
-source venv/bin/activate
+I initially attempted to implement Python OpenTelemetry instrumentation in this repository.
 
-pip install opentelemetry-distro
-opentelemetry-bootstrap -a install
+However, instead of duplicating a fragile setup, it is best to reference a working and reproducible implementation:
 
-opentelemetry-instrument \
-  --traces_exporter console,otlp \
-  --metrics_exporter console,otlp \
-  --logs_exporter console,otlp \
-  --service_name python-demo \
-  python otel_demo_devoxx.py
-```
-What works:
+👉 https://github.com/avillela/otel-errors-talk/
 
-Full automatic instrumentation (no manual SDK wiring)
-Traces exported via OTLP (visible in OTEL Viewer / otel-front)
-Metrics exported (runtime + instrumentation metrics)
-Logs exported (when configured correctly)
-End-to-end observability with OTEL Viewer
+Follow the instructions in the repository above.
 
-Notes / caveats:
+It demonstrates:
 
-Setup requires correct OpenTelemetry distro packages
-Python 3.13 may require additional compatibility fixes for some exporters
-Auto-instrumentation is the recommended approach over manual SDK setup
-
-Key learning:
-
-Auto-instrumentation is significantly more reliable than manual SDK setup in Python.
+OpenTelemetry auto-instrumentation
+OTLP export to an observability backend
+End-to-end traces generation
 
 ### PHP
 ```bash
