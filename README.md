@@ -36,6 +36,7 @@ go run otel_demo_devoxx.go
 
 
 What works: traces and metrics are sent to OTEL Viewer.
+
 What doesn’t work: logs are not supported in the current Go SDK.
 The demo runs for a few seconds and exits; metrics are batched and may show delays.
 
@@ -47,20 +48,45 @@ dotnet run
 ```
 
 What works: full support for traces, metrics, and logs.
+
 Tips: Make sure NuGet packages match the ones in the csproj file to avoid version conflicts.
+
 Note: Metrics might need a few seconds to appear in OTEL Viewer due to batching.
 
 ### Python
+
 ```bash
 cd Python
 python3 -m venv venv
 source venv/bin/activate
-pip install opentelemetry-sdk opentelemetry-exporter-otlp opentelemetry-instrumentation-logging
-python otel_demo_devoxx.py
-```
 
-What works: traces and some metrics.
-What doesn’t work: logs aren’t supported; Python OTLP metrics API is evolving.
+pip install opentelemetry-distro
+opentelemetry-bootstrap -a install
+
+opentelemetry-instrument \
+  --traces_exporter console,otlp \
+  --metrics_exporter console,otlp \
+  --logs_exporter console,otlp \
+  --service_name python-demo \
+  python otel_demo_devoxx.py
+```
+What works:
+
+Full automatic instrumentation (no manual SDK wiring)
+Traces exported via OTLP (visible in OTEL Viewer / otel-front)
+Metrics exported (runtime + instrumentation metrics)
+Logs exported (when configured correctly)
+End-to-end observability with OTEL Viewer
+
+Notes / caveats:
+
+Setup requires correct OpenTelemetry distro packages
+Python 3.13 may require additional compatibility fixes for some exporters
+Auto-instrumentation is the recommended approach over manual SDK setup
+
+Key learning:
+
+Auto-instrumentation is significantly more reliable than manual SDK setup in Python.
 
 ### PHP
 ```bash
