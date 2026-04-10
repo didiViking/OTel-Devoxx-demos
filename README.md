@@ -1,8 +1,13 @@
 # OpenTelemetry Demo - Devoxx
 
-This repository contains experiments and demos using OpenTelemetry to send **traces, metrics, and logs** to OTEL Viewer.
+This repository contains experiments and demos using OpenTelemetry to send **traces, metrics, and logs** to OTEL Viewer 
+
+👉 https://github.com/mesaglio/otel-front
 
 It includes working and non-working demos in **Go, .NET, Python, and PHP**, along with failures and lessons learned.
+
+<img width="1227" height="854" alt="Screenshot 2026-04-08 at 12 17 32" src="https://github.com/user-attachments/assets/c2c49e7f-2235-42a8-a118-daaf7af313c5" />
+
 
 ---
 
@@ -36,6 +41,8 @@ go run otel_demo_devoxx.go
 
 
 What works: traces and metrics are sent to OTEL Viewer.
+<img width="1157" height="376" alt="Screenshot 2026-04-08 at 11 59 56" src="https://github.com/user-attachments/assets/5b6e9ee3-e0d9-41bc-b4c0-faff9658ce54" />
+
 
 What doesn’t work: logs are not supported in the current Go SDK.
 The demo runs for a few seconds and exits; metrics are batched and may show delays.
@@ -48,6 +55,8 @@ dotnet run
 ```
 
 What works: full support for traces, metrics, and logs.
+<img width="1258" height="841" alt="Screenshot 2026-04-08 at 13 45 59" src="https://github.com/user-attachments/assets/b80fe4c9-3ecc-47db-a5ec-d59617054cbc" />
+
 
 Tips: Make sure NuGet packages match the ones in the csproj file to avoid version conflicts.
 
@@ -62,6 +71,9 @@ However, instead of duplicating a fragile setup, it is best to reference a worki
 👉 https://github.com/avillela/otel-errors-talk/
 
 Follow the instructions in the repository above.
+
+<img width="1245" height="698" alt="Screenshot 2026-04-10 at 10 39 20" src="https://github.com/user-attachments/assets/9aef7149-4b02-43ba-9744-98e21301b24c" />
+
 
 It demonstrates:
 
